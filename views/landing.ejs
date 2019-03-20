@@ -8,7 +8,7 @@
     </head>
         <body>
             <div class="container.fluid">
-                <nav class="navbar navbar-expand-lg navbar-light" style="background-color: palegoldenrod; padding: 10px 35px;">
+                <nav class="navbar navbar-expand-lg navbar-light">
                         <a class="navbar-brand" href="/">
                             <img src="/images/collaboration.png" width="30" height="30" class="d-inline-block align-top" alt="" style="margin-right:10px;">
                             GitSprint
@@ -19,12 +19,12 @@
                         <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav ml-auto">
                                     <li class="nav-item">
-                                            <form>
-                                                <span>Email</span>
-                                                    <input type="text" name="email">
+                                            <form action="/login" method="POST">
+                                                <span>Email/Username</span>
+                                                    <input type="text" name="username">
                                                 <span>Password</span>
                                                     <input type="password" name="password">
-                                                <input type="submit" value="Log In" style="margin-left: 15px; width: 70px;">
+                                                <input type="submit" value="Login" style="margin-left: 15px; width: 70px;">
                                             </form>
                                     </li>
                                  </ul>
@@ -37,11 +37,12 @@
                 <p>Here is a paragraph.</p> -->
                 <div class="jumbotron" id="mainJumbo">
                         <h1 class="display-4">Hello!</h1>
-                        <p class="lead">This is GitSprint. A place to share your software projects, find likeminded teammates, and get things done together.</p>
+                        <p class="lead">This is GitSprint. A place to share your software projects, find like-minded teammates, and get things done together.</p>
                         <hr class="my-4">
-                        <a class="btn btn-primary btn-lg" href="#" role="button">Sign Up</a>
+                        <a class="btn btn-primary btn-lg" href="/register" role="button">Sign Up</a>
                       </div>
             </div>
+
             <footer>
                 <p>&copy; 2019 GitSprint</p>
             </footer>
