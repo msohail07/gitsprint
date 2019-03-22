@@ -4,7 +4,8 @@
   "description": "social productivity for software projects",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -18,12 +19,19 @@
   "homepage": "https://github.com/msohail07/gitsprint#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "chai": "^4.2.0",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.4",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "http-errors": "^1.7.2",
+    "mocha": "^6.0.2",
     "mongoose": "^5.4.19",
+    "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "passport-local-mongoose": "^5.0.1"
+    "passport-local-mongoose": "^5.0.1",
+    "should": "^13.2.3"
   }
 }

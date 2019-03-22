@@ -1,8 +1,15 @@
+//  --------------------
+//       GITSPRINT
+//  --------------------
+
 const express = require("express"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     passport = require("passport"),
     LocalStrategy = require("passport-local"),
+    flash = require('connect-flash'),
+    cookieParser = require('cookie-parser'),
+    logger = requirea('morgan'),
     app = express(),
     User = require("./models/user"),
     indexRoutes = require("./routes/index"),
@@ -11,16 +18,20 @@ const express = require("express"),
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(logger("dev"));
 app.set("view engine", "ejs");
 
-mongoose.connect("mongodb://localhost/gitsprint", {useNewUrlParser: true});
-
+app.use(cookieParser());
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
     secret: "SecretHashKey",
     resave: false,
     saveUninitialized: false
 }));
+app.use(flash());
+
+mongoose.connect("mongodb://localhost/gitsprint", {useNewUrlParser: true});
+mongoose.connection.on("error", console.error.bind(console, "Mongo connection error:"));
 
 app.use(passport.initialize());
 app.use(passport.session());
