@@ -1,4 +1,6 @@
 node_modules
+.app.js.swp
+package-lock.json
 
 # Compiled source #
 ###################

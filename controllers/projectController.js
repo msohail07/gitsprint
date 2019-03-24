@@ -1,3 +1,5 @@
+const authMiddleware = require('../middleware/auth');
+
 // create project - get (show form)
 
 // create project - post (create new in databases)

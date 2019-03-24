@@ -39,8 +39,16 @@ passport.use(new LocalStrategy(User.authenticate())); // User.authenticate() met
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+// add currentUser: req.user to every route using middleware
+app.use(function(req, res, next) {
+    res.locals.currentUser = req.user; // stuff in res.locals is available in current template
+    next();
+});
+
 app.use("/", indexRoutes);
-app.use("/users", userRoutes);
+// below will be : app.use("/:username", userRoutes)
+// app.use("/users", userRoutes);
+app.use("/:username", userRoutes);
 // app.use("/campgrounds/:id/comments", commentRoutes);
 // app.use("/campgrounds", campgroundRoutes);
 

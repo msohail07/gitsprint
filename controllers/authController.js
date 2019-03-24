@@ -15,7 +15,7 @@ exports.handleRegistration = function(req, res) {
             return res.redirect("/register");
         }
         console.log(`Successfully signed up ${req.body.username}`);
-        passport.authenticate("local")(req, res, () => {res.redirect("users/index")});
+        passport.authenticate("local")(req, res, () => {res.redirect("/" + req.user.username)});
     });
 }
 

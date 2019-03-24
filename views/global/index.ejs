@@ -4,4 +4,7 @@
 <h5>This will be the landing page when logged in.\n Will contain global view of projects and gitsprints.</h5>
 <a href="/">Home</a>
 
+<h5>Current user is: <%= currentUser.username %></h5>
+<a href="<%= currentUser.username %>/profile">Your Profile</a>
+
 <% include ../partials/footer %>

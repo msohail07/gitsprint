@@ -13,8 +13,6 @@ router.get('/', gs.landing);
 
 router.get("/home", (req, res) => res.redirect("/" + req.user.username));
 
-router.get("/:username", (req, res) => res.send(req.params));
-
 router.get('/register', auth.showRegistration);
 
 router.post('/register', auth.handleRegistration);
