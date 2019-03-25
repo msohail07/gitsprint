@@ -5,13 +5,15 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const User = require("../models/user");
-const auth = require('../controllers/authController.js');
-const gs = require('../controllers/gitsprintController.js');
+const auth = require('../controllers/authController');
+const gs = require('../controllers/gitsprintController');
+const authMiddleware = require('../middleware/auth');
+
 
 // GitSprint landing page
 router.get('/', gs.landing);
 
-router.get("/home", (req, res) => res.redirect("/" + req.user.username));
+router.get("/home", authMiddleware.isLoggedIn, (req, res) => res.redirect("/" + req.user.username));
 
 router.get('/register', auth.showRegistration);
 

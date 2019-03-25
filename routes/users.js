@@ -7,7 +7,8 @@ const passport = require("passport");
 const User = require("../models/user");
 const authMiddleware = require('../middleware/auth');
 
-router.get("/", (req, res) => {
+// change to use userController
+router.get("/", authMiddleware.isLoggedIn, (req, res) => {
     res.render("global/index");
 });
 
@@ -17,6 +18,7 @@ router.get("/", (req, res) => {
 //     res.render("global/index");
 // });
 
+// change to use userController
 router.get("/profile", authMiddleware.isLoggedIn, (req, res) => {
     res.render("users/profile");
 });

@@ -14,6 +14,7 @@ const express = require("express"),
     User = require("./models/user"),
     indexRoutes = require("./routes/index"),
     userRoutes = require("./routes/users")
+    projectRoutes = require("./routes/projects")
     port = 3000;
 
 app.use(express.static(__dirname + "/public"));
@@ -46,10 +47,8 @@ app.use(function(req, res, next) {
 });
 
 app.use("/", indexRoutes);
-// below will be : app.use("/:username", userRoutes)
-// app.use("/users", userRoutes);
+app.use("/:username/projects", projectRoutes);
 app.use("/:username", userRoutes);
 // app.use("/campgrounds/:id/comments", commentRoutes);
-// app.use("/campgrounds", campgroundRoutes);
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

@@ -1,6 +1,10 @@
 <% include ../partials/header %>
 
-<h1>
-    User profile page for <%= currentUser.username %>
-</h1>
+    <h1>
+        User profile page for <%= currentUser.username %>
+    </h1>
+    <p>
+        <a class="btn btn-primary" href="/<%= currentUser.username %>/projects/new">Create new Project</a>
+    </p>
+
 <% include ../partials/footer %>

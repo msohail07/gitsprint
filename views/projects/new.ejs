@@ -2,5 +2,19 @@
 
 <% include ../partials/header %>
 
+<div class="container">
+    <h1>Create a new project</h1>
+    <form action="/<%= currentUser.username %>/projects/" method="POST">
+        <p><input type="text" name="title" placeholder="Title"></p>
+        <p><input type=text" name="description" placeholder="Description"></p>
+        <p><input type="text" name="languages" placeholder="Computer language"></p>
+        <p><input type="text" name="frameworks" placeholder="Frameworks"></p>
+        <p><span>
+            <input type="text" name="milestone" placeholder="First milestone">
+            <input type="date" name="completionDate" placeholder="Date">
+        </span></p>
+        <p><button>Submit</button></p>
+    </form>
+</div>
 
 <% include ../partials/footer %>
