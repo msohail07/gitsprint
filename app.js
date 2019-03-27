@@ -13,9 +13,11 @@ const express = require("express"),
     app = express(),
     User = require("./models/user"),
     indexRoutes = require("./routes/index"),
-    userRoutes = require("./routes/users")
-    projectRoutes = require("./routes/projects")
+    userRoutes = require("./routes/users"),
+    projectRoutes = require("./routes/projects"),
     port = 3000;
+
+require('./src/database');
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -31,12 +33,12 @@ app.use(require("express-session")({
 }));
 app.use(flash());
 
-mongoose.connect("mongodb://localhost/gitsprint", {useNewUrlParser: true});
-mongoose.connection.on("error", console.error.bind(console, "Mongo connection error:"));
+// mongoose.connect("mongodb://localhost/gitsprint", {useNewUrlParser: true});
+// mongoose.connection.on("error", console.error.bind(console, "Mongo connection error:"));
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate())); // User.authenticate() method comes with passportLocalMongoose
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
