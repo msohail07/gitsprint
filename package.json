@@ -28,6 +28,7 @@
     "http-errors": "^1.7.2",
     "mocha": "^6.0.2",
     "mongoose": "^5.4.19",
+    "mongoose-validator": "^2.1.0",
     "morgan": "^1.9.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",

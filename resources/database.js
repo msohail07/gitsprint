@@ -1,11 +1,13 @@
 
 let mongoose = require('mongoose');
-const server = 'localhost'; // REPLACE WITH YOUR DB SERVER
-const database = 'gitsprint';      // REPLACE WITH YOUR DB NAME
+const server = 'localhost';
+const database = 'gitsprint';
+
 class Database {
-  constructor() {
-    this._connect()
-  }
+    constructor() {
+        this._connect()
+    }
+
 _connect() {
      mongoose.connect(`mongodb://${server}/${database}`, {useNewUrlParser: true})
        .then(() => {

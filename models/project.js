@@ -2,15 +2,17 @@ var mongoose = require("mongoose");
 var passportLocalMongoose = require("passport-local-mongoose");
 
 var projectSchema = mongoose.Schema({
-    title: String,
-    description: String,
-    languages: [String],
+    title: {type: String, required: true},
+    description: {type: String, required: true},
+    languages: {type: [String], required: true},
     frameworks: [String],
     timestamp: {type: Date, default: Date.now()},
     firstMilestone: {
         objective: String,
-        date: Date
+        date: Date,
+        // required: true
     },
+
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
