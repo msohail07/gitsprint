@@ -10,6 +10,8 @@ var userSchema = mongoose.Schema({
         type: String,
         // required: true
     }
+    // locationCity: String
+    // locationState: String
     // languages: Array,
     // frameworks: Array,
     // expInYears: Number,

@@ -6,8 +6,35 @@
     <h1>Create a new project</h1>
     <form action="/<%= currentUser.username %>/projects/" method="POST">
         <p><input type="text" name="title" placeholder="Title"></p>
-        <p><input type=text" name="description" placeholder="Description"></p>
-        <p><input type="text" name="languages" placeholder="Computer language"></p>
+        <p><textarea name="description" placeholder="Project description"></textarea></p>
+        <p><strong> Computer language(s):</strong></p>
+            <span>
+                    <input type="checkbox" name="languages[]" value="Javascript"> Javascript
+                    <input type="checkbox" name="languages[]" value="Python"> Python
+                    <input type="checkbox" name="languages[]" value="Java"> Java
+                    <input type="checkbox" name="languages[]" value="C++"> C++
+                    <input type="checkbox" name="languages[]" value="Swift"> Swift
+                    <input type="checkbox" name="languages[]" value="HTML"> HTML
+                    <input type="checkbox" name="languages[]" value="CSS"> CSS
+            </span><br>
+            <span>
+                    <input type="checkbox" name="languages[]" value="Typescript"> Typescript
+                    <input type="checkbox" name="languages[]" value="Go"> Go
+                    <input type="checkbox" name="languages[]" value="Ruby"> Ruby
+                    <input type="checkbox" name="languages[]" value="R"> R
+                    <input type="checkbox" name="languages[]" value="PHP"> PHP
+                    <input type="checkbox" name="languages[]" value="Perl"> Perl
+                    <input type="checkbox" name="languages[]" value="Kotlin"> Kotlin
+                    <input type="checkbox" name="languages[]" value="C#"> C#
+                    <input type="checkbox" name="languages[]" value="Rust"> Rust
+            </span><br>
+            <span>
+                    <input type="checkbox" name="languages[]" value="Erlang"> Erlang
+                    <input type="checkbox" name="languages[]" value="Scheme"> Scheme
+                    <input type="checkbox" name="languages[]" value="Scala"> Scala
+                    <input type="checkbox" name="languages[]" value="Haskell"> Haskell
+            </span><br>
+        <p></p>
         <p><input type="text" name="frameworks" placeholder="Frameworks"></p>
         <p><span>
             <input type="text" name="milestone" placeholder="First milestone">

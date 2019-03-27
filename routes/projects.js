@@ -8,6 +8,8 @@ const authMiddleware = require('../middleware/auth');
 // router.get('/', authMiddleware.isLoggedIn, projectController.getAllProjectsForThisUserFromDB)
 
 // router.post('/', authMiddleware.isLoggedIn, projectController.postNewProjectToDB)
+router.post('/', authMiddleware.isLoggedIn, (req, res) => {res.send(req.body)});
+
 
 // router.get('/new', authMiddlware.isLoggedIn, projectController.renderFormToCreateNewProject)
 router.get('/new', authMiddleware.isLoggedIn, (req, res) => res.render('projects/new'));
