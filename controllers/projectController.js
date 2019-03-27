@@ -1,6 +1,7 @@
-const authMiddleware = require('../middleware/auth');
-
 // create project - get (show form)
+exports.newProjectForm = function(req, res) {
+    res.render('projects/new');
+}
 
 // create project - post (create new in databases)
 
