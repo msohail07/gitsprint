@@ -8,8 +8,8 @@ const projectController = require('../controllers/projectController');
 
 // router.get('/', authMiddleware.isLoggedIn, projectController.getAllProjectsForThisUserFromDB)
 
-router.post('/', authMiddleware.isLoggedIn, projectController.addNewProject)
-// router.post('/', authMiddleware.isLoggedIn, (req, res) => {res.send(req.body)});
+router.post('/', [authMiddleware.isLoggedIn, projectController.sanitize, projectController.validate('addNewProject')], projectController.addNewProject);
+// router.post('/', authMiddleware.isLoggedIn, projectController.addNewProject)
 
 
 // router.get('/new', authMiddlware.isLoggedIn, projectController.renderFormToCreateNewProject)

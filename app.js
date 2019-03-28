@@ -3,6 +3,7 @@
 //  --------------------
 
 const express = require("express"),
+    validator = require("express-validator"),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
     passport = require("passport"),
@@ -21,6 +22,7 @@ require('./resources/database');
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(validator());
 app.use(logger("dev"));
 app.set("view engine", "ejs");
 

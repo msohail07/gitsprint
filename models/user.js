@@ -9,7 +9,7 @@ var userSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        required: true
+        // required: true
     }
     // locationCity: String
     // locationState: String
