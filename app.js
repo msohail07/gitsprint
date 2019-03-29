@@ -25,6 +25,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(validator());
 app.use(logger("dev"));
 app.set("view engine", "ejs");
+mongoose.set('useCreateIndex', true);
 
 app.use(cookieParser());
 // PASSPORT CONFIGURATION

@@ -24,7 +24,7 @@ exports.validate = function(route) {
                 body('description').not().isEmpty().withMessage('Description required'),
                 body('languages').not().isEmpty().withMessage('Must indicate at least one language'),
                 // frameworks
-                body('milestone').not().isEmpty().withMessage('Milestone required').isAlphanumeric().withMessage('Milestone must be alphanumeric only'),
+                body('milestone').not().isEmpty().withMessage('Milestone required'),
                 body('completionDate').exists().withMessage('Milestone completion date required')
             ]
         }
@@ -54,9 +54,6 @@ exports.addNewProject = function(req, res) {
     })
 
     if (!errors.isEmpty()) {
-        console.log(errors);
-        console.log("---------")
-        console.log(errors.array());
         res.render('projects/new', {proj: p, errors: errors.array({onlyFirstError: true})});
         return;
     }

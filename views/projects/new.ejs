@@ -5,8 +5,9 @@
 <div class="container">
     <h1>Create a new project</h1>
     <form action="/<%= currentUser.username %>/projects/" method="POST">
-        <p><input type="text" name="title" placeholder="Title"></p>
-        <p><textarea name="description" placeholder="Project description"></textarea></p>
+        <!-- <p><input type="text" name="title" placeholder="Title"></p> -->
+        <p><input type="text" name="title" placeholder="Title" <% if(proj) {%> value="<%= proj.title %>" <% } %>></p>
+        <p><textarea name="description" placeholder="Project description"><% if(proj) {%><%=proj.description %><% } %></textarea></p>
         <p><strong> Computer language(s):</strong></p>
             <span>
                     <input type="checkbox" name="languages[]" value="Javascript"> Javascript
@@ -36,10 +37,11 @@
                     <input type="checkbox" name="languages[]" value="Other"> Other
             </span><br>
         <p></p>
-        <p><input type="text" name="frameworks" placeholder="Frameworks"></p>
+        <p><input type="text" name="frameworks" placeholder="Frameworks" <% if(proj) {%> value="<%= proj.frameworks %>" <% } %>></p>
         <p><span>
-            <input type="text" name="milestone" placeholder="First milestone">
-            <input type="date" name="completionDate" placeholder="Date">
+            <input type="text" name="milestone" placeholder="First milestone" <% if(proj) {%> value="<%= proj.firstMilestone.obj %>" <% } %>>
+            <input type="date" name="completionDate">
+            <!-- <input type="date" name="completionDate" placeholder="Date" <% if(proj) {%> value="<%= proj.firstMilestone.date %>" <% } %>> -->
         </span></p>
         <p><button>Submit</button></p>
     </form>

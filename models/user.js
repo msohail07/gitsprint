@@ -18,7 +18,7 @@ var userSchema = new mongoose.Schema({
     // expInYears: Number,
     // bio: String
     // projects: [{ type: Schema.Types.ObjectId, ref: 'Project' }]
-    // gitsprint [{ type: Schema.Types.ObjectId, ref: 'GitSprint' }]
+    // gitsprints [{ type: Schema.Types.ObjectId, ref: 'GitSprint' }]
 });
 
 userSchema.plugin(passportLocalMongoose);

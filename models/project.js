@@ -1,5 +1,4 @@
 var mongoose = require("mongoose");
-var passportLocalMongoose = require("passport-local-mongoose");
 
 var projectSchema = mongoose.Schema({
     title: {type: String, required: true},
@@ -28,5 +27,4 @@ var projectSchema = mongoose.Schema({
     ]
 });
 
-projectSchema.plugin(passportLocalMongoose);
 module.exports = mongoose.model("Project", projectSchema);
