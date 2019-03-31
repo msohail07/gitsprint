@@ -1,7 +1,7 @@
 <% include ../partials/header %>
 
     <h1>
-        User profile page for <%= currentUser.username %>
+        Welcome, <%= currentUser.username %>
     </h1>
     <ul>
 
@@ -9,5 +9,20 @@
     <p>
         <a class="btn btn-primary" href="/<%= currentUser.username %>/projects/new">Create new Project</a>
     </p>
+    <h4>Your Projects:</h4>
+    <ol>
+        <% userProjects.forEach((proj) => { %>
+            <ul>
+                <li>Title: <%= proj.title %></li>
+                <li>Description: <%= proj.description %></li>
+                <li>Milestone: <%= proj.firstMilestone %></li>
+                <li>Languages: <%= proj.languages %></li>
+                <% if (proj.frameworks.length > 0) { %>
+                    <li>Frameworks: <%= proj.frameworks %></li>
+                <% } %>
+            </ul>
+            <br>
+        <% }) %>
+    </ol>
 
 <% include ../partials/footer %>

@@ -1,4 +1,3 @@
-
 let mongoose = require('mongoose');
 const server = 'localhost';
 const database = 'gitsprint';
