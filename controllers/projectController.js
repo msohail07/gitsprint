@@ -74,3 +74,16 @@ exports.addNewProject = function(req, res) {
 // update project - get (show update form)
 
 // update project - post (post update to database)
+
+// show project - get (display project show page)
+    // res.render('projects/show', {proj: proj}) .. populate comments and then call exec
+exports.showProjectPage = function(req, res) {
+    //     Project.findById(req.params.id).populate('comments').exec(function(err, proj) {
+    Project.findById(req.params.id).exec(function(err, proj) {
+        if (err) {
+            console.error(err)
+        } else {
+            res.render('projects/show', {proj: proj})
+        }
+    })
+}

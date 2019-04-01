@@ -57,6 +57,6 @@ app.use("/:username", userRoutes);
 // app.use("/campgrounds/:id/comments", commentRoutes);
 // app.use("/:username/project/:id/comments", commentRoutes);
 // app.use("/:username/gitsprint/:id/comments")
-// might be better to drop /:username from above two routes... 
+// might be better to drop /:username from above two routes...
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

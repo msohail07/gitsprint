@@ -16,6 +16,6 @@ router.post('/', [authMiddleware.isLoggedIn, projectController.sanitize, project
 router.get('/new', authMiddleware.isLoggedIn, projectController.newProjectForm);
 
 // show a specific project
-// router.get('/:id', isLoggedIn, projectController.findProjByIDAndRenderProjectShowPage)
+router.get('/:id', authMiddleware.isLoggedIn, projectController.showProjectPage)
 
 module.exports = router

@@ -16,11 +16,9 @@ body .navbar {
 .nav-item input {
     width: 125px;
     height: 25px;
-    /* display: inline-block; */
 }
 
 #mainJumbo {
-    /* height: 100%; */
     margin-bottom: 0px;
     height: 100vh;
 }

@@ -10,19 +10,20 @@
         <a class="btn btn-primary" href="/<%= currentUser.username %>/projects/new">Create new Project</a>
     </p>
     <h4>Your Projects:</h4>
-    <ol>
-        <% userProjects.forEach((proj) => { %>
-            <ul>
-                <li>Title: <%= proj.title %></li>
-                <li>Description: <%= proj.description %></li>
-                <li>Milestone: <%= proj.firstMilestone %></li>
-                <li>Languages: <%= proj.languages %></li>
-                <% if (proj.frameworks.length > 0) { %>
-                    <li>Frameworks: <%= proj.frameworks %></li>
-                <% } %>
-            </ul>
-            <br>
-        <% }) %>
-    </ol>
-
+        <!-- <ol> -->
+            <% userProjects.forEach((proj) => { %>
+                <ul style="border:1px solid red">
+                    <li><a href="/<%= currentUser.username %>/projects/<%= proj._id %>">Title: <%= proj.title %></a></li>
+                    <li>Description: <%= proj.description %></li>
+                    <li>Milestone: <%= proj.firstMilestone %></li>
+                    <li>Languages: <%= proj.languages %></li>
+                    <% if (proj.frameworks != "") { %>
+                        <li>Frameworks: <%= proj.frameworks %></li>
+                    <% } else { %>
+                        <li>Frameworks: None</li>
+                    <% } %>
+                </ul>
+                <br>
+            <% }) %>
+        <!-- </ol> -->
 <% include ../partials/footer %>
