@@ -8,13 +8,12 @@
     </p>
     <hr>
     <p><strong>Add a comment:</strong></p>
-    <!-- <form action="/<%= currentUser.username %>/projects/<%= proj._id %>/comments" method="POST"> -->
-    <form>
-        <textarea rows="3" cols="100" placeholder="..."></textarea>
-        <br><button type="button" class="btn btn-primary">Submit</button>
+    <form action="/project/<%= proj._id %>/comment" method="POST">
+        <textarea rows="3" cols="100" placeholder="..." name="comment[text]"></textarea>
+        <br><button>Submit</button>
     </form>
-<!--
+
     <% proj.comments.forEach(function(comment) { %>
         <p><%= comment.author.username %> - <%= comment.text %></p>
-    <% }) %> -->
+    <% }) %>
 <% include ../partials/footer %>

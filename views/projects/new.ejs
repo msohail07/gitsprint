@@ -4,7 +4,8 @@
 
 <div class="container">
     <h1>Create a new project</h1>
-    <form action="/<%= currentUser.username %>/projects/" method="POST">
+    <!-- <form action="/<%= currentUser.username %>/projects/" method="POST"> -->
+    <form action="/project/" method="POST">
         <!-- <p><input type="text" name="title" placeholder="Title"></p> -->
         <p><input type="text" name="title" placeholder="Title" <% if(proj) {%> value="<%= proj.title %>" <% } %>></p>
         <p><textarea name="description" placeholder="Project description"><% if(proj) {%><%=proj.description %><% } %></textarea></p>

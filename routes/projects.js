@@ -6,16 +6,13 @@ const router = express.Router();
 const authMiddleware = require('../middleware/auth');
 const projectController = require('../controllers/projectController');
 
-// router.get('/', authMiddleware.isLoggedIn, projectController.getAllProjectsForThisUserFromDB)
+// save new project to DB
+router.post('/', [authMiddleware.isLoggedIn, projectController.sanitize, projectController.validate('saveNewProject')], projectController.saveNewProject);
 
-router.post('/', [authMiddleware.isLoggedIn, projectController.sanitize, projectController.validate('addNewProject')], projectController.addNewProject);
-// router.post('/', authMiddleware.isLoggedIn, projectController.addNewProject)
-
-
-// router.get('/new', authMiddlware.isLoggedIn, projectController.renderFormToCreateNewProject)
+// show new project creation form
 router.get('/new', authMiddleware.isLoggedIn, projectController.newProjectForm);
 
-// show a specific project
+// specific project show page
 router.get('/:id', authMiddleware.isLoggedIn, projectController.showProjectPage)
 
 module.exports = router

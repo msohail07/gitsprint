@@ -1,4 +1,6 @@
+const mongoose = require('mongoose');
 const Project = require('../models/project');
+const Comment = require('../models/comment');
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 
@@ -18,7 +20,7 @@ exports.sanitize = function(req, res, next) {
 // sanitize and validation middleware will go here... then put as array in routes/projects for addNewProject post route.
 exports.validate = function(route) {
     switch(route) {
-        case 'addNewProject': {
+        case 'saveNewProject': {
             return [
                 body('title').not().isEmpty().withMessage('Title required').isLength({min: 4}).trim().withMessage('Title too short'),
                 body('description').not().isEmpty().withMessage('Description required'),
@@ -32,7 +34,7 @@ exports.validate = function(route) {
 }
 
 // create project - post (create new in databases)
-exports.addNewProject = function(req, res) {
+exports.saveNewProject = function(req, res) {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
@@ -54,7 +56,7 @@ exports.addNewProject = function(req, res) {
     })
 
     if (!errors.isEmpty()) {
-        res.render('projects/new', {proj: p, errors: errors.array({onlyFirstError: true})});
+        res.render('project/new', {proj: p, errors: errors.array({onlyFirstError: true})});
         return;
     }
 
@@ -77,13 +79,50 @@ exports.addNewProject = function(req, res) {
 
 // show project - get (display project show page)
     // res.render('projects/show', {proj: proj}) .. populate comments and then call exec
+
 exports.showProjectPage = function(req, res) {
-    //     Project.findById(req.params.id).populate('comments').exec(function(err, proj) {
-    Project.findById(req.params.id).exec(function(err, proj) {
+    Project.findById(req.params.id).populate('comments').exec(function(err, proj) {
         if (err) {
-            console.error(err)
+            console.log(err)
         } else {
             res.render('projects/show', {proj: proj})
         }
     })
 }
+
+
+
+
+// exports.showProjectPage = function(req, res) {
+//     //     Project.findById(req.params.id).populate('comments').exec(function(err, proj) {
+//     // console.log("SHOW PROJECT req.params: ============")
+//     // console.log(req.params)
+//     // console.log("SHOW PROJECT req: ============")
+//     // console.log(req)
+//     Project.findById(req.params.id).exec(function(err, proj) {
+//         if (err) {
+//             console.error(err)
+//         } else {
+//             comments = []
+//             // for each commentId in proj.comments
+//                 // x = Comment.findById(commentID)
+//                 // get [x.text, x.author.username, x.timestamp] and insert into comments array
+//             // res.render('projects/show', {proj: proj, comments: extractedComments})
+//             proj.comments.forEach((commentID) => {
+//                 // console.log(commentID.id.toString('hex'))
+//                 Comment.findById(commentID.id.toString('hex'), 'text', (err, comment) => {
+//                     if (err) {
+//                         return console.log(err)
+//                     } else {
+//                         console.log("COMMENT:" + comment)
+//                         comments.push(comment)
+//                         console.log(comments)
+//                     }
+//                 })
+//             })
+//             console.log("COMMENTS EXTRACTED ARRAY:")
+//             console.log(comments)
+//             res.render('projects/show', {proj: proj, comments: comments})
+//         }
+//     })
+// }

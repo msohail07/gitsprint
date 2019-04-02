@@ -15,6 +15,7 @@ const express = require("express"),
     User = require("./models/user"),
     indexRoutes = require("./routes/index"),
     userRoutes = require("./routes/users"),
+    commentRoutes = require("./routes/comments"),
     projectRoutes = require("./routes/projects"),
     port = 3000;
 
@@ -51,12 +52,10 @@ app.use(function(req, res, next) {
     next();
 });
 
-app.use("/", indexRoutes);
-app.use("/:username/projects", projectRoutes);
+app.use("/", indexRoutes)
+app.use("/project", projectRoutes)
+app.use("/project/:id/comment", commentRoutes);
+// app.use("/gitsprint/:id/comment", commentRoutes);
 app.use("/:username", userRoutes);
-// app.use("/campgrounds/:id/comments", commentRoutes);
-// app.use("/:username/project/:id/comments", commentRoutes);
-// app.use("/:username/gitsprint/:id/comments")
-// might be better to drop /:username from above two routes...
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
