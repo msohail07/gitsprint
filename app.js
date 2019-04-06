@@ -19,7 +19,7 @@ const express = require("express"),
     projectRoutes = require("./routes/projects"),
     port = 3000;
 
-require('./resources/database');
+require('./db/database');
 
 app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended: true}));

@@ -4,14 +4,14 @@
 const express = require("express");
 const router = express.Router();
 const auth = require('../controllers/authController');
-const gs = require('../controllers/gitsprintController');
+const gitsprint = require('../controllers/gitsprintController');
 const authMiddleware = require('../middleware/auth');
 
 
 // GitSprint landing page
-router.get('/', gs.landing);
+router.get('/', gitsprint.landing);
 
-router.get("/home", authMiddleware.isLoggedIn, gs.redirectHome);
+router.get("/home", authMiddleware.isLoggedIn, gitsprint.redirectHome);
 
 router.get('/register', auth.showRegistration);
 
