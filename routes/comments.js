@@ -6,5 +6,4 @@ const commentController = require('../controllers/commentController');
 // save new comment to DB
 router.post('/', [authMiddleware.isLoggedIn, commentController.sanitize, commentController.validate('saveNewComment')], commentController.saveComment)
 
-
 module.exports = router

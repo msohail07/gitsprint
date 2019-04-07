@@ -23,7 +23,11 @@ exports.saveComment = function(req, res) {
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
-        console.log("ERRORS ISNT EMPTY")
+        console.log("ERRORS::")
+        for (let err in errors.array) {
+            console.log(err.msg)
+        }
+        // console.log(errors.array)
         res.redirect('/project/' + req.params.id)
         return;
     }

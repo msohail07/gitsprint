@@ -28,14 +28,6 @@ exports.login = function(req, res) {
     })(req, res);
 }
 
-// exports.login = function(req, res) {
-//     passport.authenticate('local')(req, res),
-//     (req, res) => {
-//         console.log(req.user);
-//         res.redirect("/users/index");
-//     }
-// }
-
 // handle logout
 exports.logout = function(req, res) {
     console.log(req.body);

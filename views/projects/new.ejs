@@ -41,9 +41,13 @@
         <p><input type="text" name="frameworks" placeholder="Frameworks" <% if(proj) {%> value="<%= proj.frameworks %>" <% } %>></p>
         <p><span>
             <input type="text" name="milestone" placeholder="First milestone" <% if(proj) {%> value="<%= proj.firstMilestone.obj %>" <% } %>>
-            <input type="date" name="completionDate">
+            <input type="date" name="milestoneCompletionDate">
             <!-- <input type="date" name="completionDate" placeholder="Date" <% if(proj) {%> value="<%= proj.firstMilestone.date %>" <% } %>> -->
         </span></p>
+        <p>
+            Rough completion date:
+            <input type="date" name="projCompletionDate">
+        </p>
         <p><button>Submit</button></p>
     </form>
 

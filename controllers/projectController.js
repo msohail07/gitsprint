@@ -27,7 +27,8 @@ exports.validate = function(route) {
                 body('languages').not().isEmpty().withMessage('Must indicate at least one language'),
                 // frameworks
                 body('milestone').not().isEmpty().withMessage('Milestone required'),
-                body('completionDate').exists().withMessage('Milestone completion date required')
+                body('milestoneCompletionDate').not().isEmpty().withMessage('Milestone completion date required'),
+                body('projCompletionDate').not().isEmpty().withMessage('Rough completion date required')
             ]
         }
     }
@@ -44,7 +45,7 @@ exports.saveNewProject = function(req, res) {
     }
     let firstMilestone = {
         obj: req.body.milestone,
-        date: req.body.completionDate
+        date: req.body.milestoneCompletionDate
     }
     let p = new Project({
         title: req.body.title,
@@ -52,6 +53,7 @@ exports.saveNewProject = function(req, res) {
         languages: req.body.languages,
         frameworks: req.body.frameworks,
         firstMilestone: firstMilestone,
+        completionDate: req.body.projCompletionDate,
         author: author,
     })
 

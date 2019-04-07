@@ -11,6 +11,7 @@ var projectSchema = mongoose.Schema({
         date: Date,
         // required: true
     },
+    completionDate: {type: Date, required: true},
 
     author: {
         id: {
@@ -28,3 +29,9 @@ var projectSchema = mongoose.Schema({
 });
 
 module.exports = mongoose.model("Project", projectSchema);
+
+// getDay(dateOfInterest) (virtual function to help with gitsprint creation) - dateofInterest is milestone or completion date
+
+// getWeek(dateOfInterest) (virtual function to help with gitsprint creation)
+
+// getYear(dateOfInterest) (virtual function to help with gitsprint creation)
