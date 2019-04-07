@@ -35,7 +35,7 @@ exports.validate = function(route) {
 }
 
 // create project - post (create new in databases)
-exports.saveNewProject = function(req, res) {
+exports.saveNewProject = function(req, res, next) {
     // Extract the validation errors from a request.
     const errors = validationResult(req);
 
@@ -65,12 +65,14 @@ exports.saveNewProject = function(req, res) {
     p.save()
         .then(proj => {
             console.log(proj)
+            req.projCreated = proj
             res.redirect(`/${req.user.username}/profile`)
         })
         .catch(err => {
             console.error(err)
             res.ren
         })
+    next() // trigger gitsprintController.checkSprintAvailability
 }
 
 // delete project - post (delete in database)

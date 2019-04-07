@@ -17,6 +17,7 @@ const express = require("express"),
     userRoutes = require("./routes/users"),
     commentRoutes = require("./routes/comments"),
     projectRoutes = require("./routes/projects"),
+    // gitsprintRoutes = require("./routes/gitsprints")
     port = 3000;
 
 require('./db/database');
@@ -56,6 +57,7 @@ app.use("/", indexRoutes)
 app.use("/project", projectRoutes)
 app.use("/project/:id/comment", commentRoutes);
 // app.use("/gitsprint/:id/comment", commentRoutes);
+// app.use("/gitsprint", gitsprintRoutes);
 app.use("/:username", userRoutes);
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
