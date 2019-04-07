@@ -8,7 +8,8 @@ const projectController = require('../controllers/projectController');
 const gitsprintController = require('../controllers/gitsprintController');
 
 // save new project to DB
-router.post('/', [authMiddleware.isLoggedIn, projectController.sanitize, projectController.validate('saveNewProject')], [projectController.saveNewProject, gitsprintController.checkSprintAvailability, gitsprintController.createNewGitsprint]);
+// router.post('/', [authMiddleware.isLoggedIn, projectController.sanitize, projectController.validate('saveNewProject')], [projectController.saveNewProject, gitsprintController.checkSprintAvailability, gitsprintController.createNewGitsprint]);
+router.post('/', [authMiddleware.isLoggedIn, projectController.sanitize, projectController.validate('saveNewProject')], [projectController.saveNewProject, gitsprintController.checkSprintAvailability]);
 
 // show new project creation form
 router.get('/new', authMiddleware.isLoggedIn, projectController.newProjectForm);

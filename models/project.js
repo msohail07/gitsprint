@@ -9,7 +9,6 @@ var projectSchema = mongoose.Schema({
     firstMilestone: {
         objective: String,
         date: Date,
-        month: {type: Number, default: date.getMonth()}
         // day: date.getDate(),
         // year: date.getYear()
         // required: true

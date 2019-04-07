@@ -65,7 +65,7 @@ exports.saveNewProject = function(req, res, next) {
     p.save()
         .then(proj => {
             console.log(proj)
-            req.projCreated = proj
+            req.newProj = proj
             res.redirect(`/${req.user.username}/profile`)
         })
         .catch(err => {
