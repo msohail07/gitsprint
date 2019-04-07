@@ -65,14 +65,25 @@ exports.saveNewProject = function(req, res, next) {
     p.save()
         .then(proj => {
             console.log(proj)
-            req.newProj = proj
-            res.redirect(`/${req.user.username}/profile`)
+            console.log("PRINTING REQUEST OBJECT -------")
+            console.log(req)
+            console.log("PRINTING RESPONSE OBJECT -------")
+            console.log(res)
+            req.gsProjArr = [proj]
+            console.log("PRINTING REQUEST OBJECT AFTER adding req.gsProjArr = [proj]-------")
+            console.log(req)
+            console.log("projectController::69")
+            console.log([proj])
+            console.log("=========================")
+            console.log(req.gsProjArr[0]);
+            // req.app.locals.gsProjArr = [proj]
+            // res.redirect(`/${req.user.username}/profile`)
         })
+        .then(() => next())
         .catch(err => {
             console.error(err)
-            res.ren
         })
-    next() // trigger gitsprintController.checkSprintAvailability
+    // next() // trigger gitsprintController.checkSprintAvailability
 }
 
 // delete project - post (delete in database)

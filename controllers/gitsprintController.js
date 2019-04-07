@@ -1,4 +1,5 @@
 const Project = require('../models/project');
+const GitSprint = require('../models/gitsprint');
 
 exports.landing = function(req, res) {
     res.render('landing');
@@ -21,19 +22,53 @@ function findSameLangProj(projArray, langArray) {
 }
 
 exports.checkSprintAvailability = function(req, res, next) {
-    let newProj = req.newProj;
-    let pairProject = Project.find({ 'firstMilestone.date.getDate()' : newProj.date.getDate(), 'firstMilestone.date.getMonth()' : newProj.date.getMonth(), 'firstMilestone.date.getYear()' : newProj.date.getYear()}).exec()
+    console.log("in exports.checkSprintAvailability --------------")
+    console.log(req)
+    let newProj = req.gsProjArr[0];
+    // let newProj = req.app.locals.gsProjArr[0];
+    let pairProject = Project.find({ 'firstMilestone.date.getDate()' : newProj.firstMilestone.date.getDate(), 'firstMilestone.date.getMonth()' : newProj.firstMilestone.date.getMonth(), 'firstMilestone.date.getYear()' : newProj.firstMilestone.date.getYear()}).exec()
     pairProject
     .then((p) => {
         if (p.length > 1) {
             // find project that uses same language
-            req.pairedProj = findSameLangProj(p, newProj.languages)
+            req.gsProjArr.push(findSameLangProj(p, newProj.languages))
+            // req.app.locals.gsProjArr.push(findSameLangProj(p, newProj.languages))
         } else {
-            req.pairedProj = p[0]
+            req.gsProjArr.push(p[0])
+            // res.app.locals.gsProjArr.push(p[0])
         }
-        next()
+        // next()
     })
-    .catch(() => {return})
+    .then(() => next())
+    .catch(() => {res.redirect(`/${req.user.username}/profile`)})
+}
+
+function getTeamFromProjArray(projArray) {
+    let team = []
+    for (let proj in projArray) {
+        team.push(proj.author)
+    }
+}
+
+exports.createNewGitsprint = function(req, res) {
+    let gsProjects = req.gsProjArr
+    // let gsProjects = req.app.locals.gsProjArr
+    let team = getTeamFromProjArray(gsProjects)
+    let gs = new GitSprint({
+        teamMembers: [team],
+        projects: [gsProjects]
+    })
+
+    gs.save()
+        .then(gs => {
+            console.log("NEW GITSPRINT CREATED:")
+            console.log(gs)
+        })
+        .catch(err => {
+            console.error(err)
+        })
+    res.redirect(`/${req.user.username}/profile`)
+
 }
 
 
@@ -49,15 +84,3 @@ exports.checkSprintAvailability = function(req, res, next) {
 //                     // else return project
 //             // else return project
 //         // else return (don't call next)
-
-
-//     // req.partnerProj = projectFoundAbove -- then use req.newProj and req.partnerProj to create a gitsprint
-//     //next()
-// }
-
-
-// exports.createNewGitsprint =
-
-
-// show gitsprint page
-// exports.gitsprint_show = (req, res) => {}

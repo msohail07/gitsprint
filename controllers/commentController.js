@@ -32,32 +32,6 @@ exports.saveComment = function(req, res) {
         return;
     }
 
-    // Project.findById(req.params.id, (err, proj) => {
-    //     if (err) {
-    //         console.error(err);
-    //         res.redirect('/' + req.user.username) // redirect to global feed
-    //     } else {
-    //         Comment.create(req.body.comment, (err, newComment) => {
-    //             console.log('IN COMMENT.CREATE')
-    //             if (err) {
-    //                 console.log('IN COMMENT.CREATE.ERR')
-    //                 console.log(err)
-    //             } else {
-    //                 console.log('IN COMMENT.CREATE.SAVING')
-    //                 newComment.author.id = req.user._id
-    //                 newComment.author.username = req.user.username
-    //                 newComment.save()
-    //                 console.log('AFTER NEWCOMMENT.SAVE')
-    //                 // link comment to project document
-    //                 proj.comments.push(newComment)
-    //                 proj.save()
-    //                 console.log('AFTER PROJ.SAVE')
-    //                 res.redirect('/project/' + proj._id)
-    //             }
-    //         })
-    //     }
-    // })
-
     Project.findById(req.params.id, (err, proj) => {
         if (err) {
             console.error(err);
