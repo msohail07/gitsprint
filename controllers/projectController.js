@@ -58,24 +58,24 @@ exports.saveNewProject = function(req, res, next) {
     })
 
     if (!errors.isEmpty()) {
-        res.render('project/new', {proj: p, errors: errors.array({onlyFirstError: true})});
+        res.render('projects/new', {proj: p, errors: errors.array({onlyFirstError: true})});
         return;
     }
 
     p.save()
         .then(proj => {
-            console.log(proj)
-            console.log("PRINTING REQUEST OBJECT -------")
-            console.log(req)
-            console.log("PRINTING RESPONSE OBJECT -------")
-            console.log(res)
+            // console.log(proj)
+            // console.log("PRINTING REQUEST OBJECT -------")
+            // console.log(req)
+            // console.log("PRINTING RESPONSE OBJECT -------")
+            // console.log(res)
             req.gsProjArr = [proj]
-            console.log("PRINTING REQUEST OBJECT AFTER adding req.gsProjArr = [proj]-------")
-            console.log(req)
-            console.log("projectController::69")
-            console.log([proj])
-            console.log("=========================")
-            console.log(req.gsProjArr[0]);
+            // console.log("PRINTING REQUEST OBJECT AFTER adding req.gsProjArr = [proj]-------")
+            // console.log(req)
+            // console.log("projectController::69")
+            // console.log([proj])
+            // console.log("=========================")
+            // console.log(req.gsProjArr[0]);
             // req.app.locals.gsProjArr = [proj]
             // res.redirect(`/${req.user.username}/profile`)
         })

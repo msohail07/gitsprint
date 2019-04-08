@@ -25,10 +25,13 @@ exports.checkSprintAvailability = function(req, res, next) {
     console.log("in exports.checkSprintAvailability --------------")
     console.log(req)
     let newProj = req.gsProjArr[0];
-    // let newProj = req.app.locals.gsProjArr[0];
     let pairProject = Project.find({ 'firstMilestone.date.getDate()' : newProj.firstMilestone.date.getDate(), 'firstMilestone.date.getMonth()' : newProj.firstMilestone.date.getMonth(), 'firstMilestone.date.getYear()' : newProj.firstMilestone.date.getYear()}).exec()
     pairProject
     .then((p) => {
+        console.log("p --- PPPPPPPPPPPPPPP")
+
+        console.log(p)
+        if (p.length <= 1 && p[0]._id.equals(newProj._id)) {return}
         if (p.length > 1) {
             // find project that uses same language
             req.gsProjArr.push(findSameLangProj(p, newProj.languages))
@@ -40,23 +43,37 @@ exports.checkSprintAvailability = function(req, res, next) {
         // next()
     })
     .then(() => next())
-    .catch(() => {res.redirect(`/${req.user.username}/profile`)})
+    .catch(() => {return res.redirect(`/${req.user.username}/profile`)})
 }
 
 function getTeamFromProjArray(projArray) {
     let team = []
+    console.log("projArray ************************")
+    console.log(projArray)
+    console.log("projArray ************************")
+
     for (let proj in projArray) {
-        team.push(proj.author)
+        if (!(typeof(proj.author) === 'undefined')) {
+            team.push(proj.author.id)
+        }
     }
+    return team
 }
 
 exports.createNewGitsprint = function(req, res) {
+    console.log("IN exports.createNewGitsprint")
     let gsProjects = req.gsProjArr
+    console.log('gsProjects !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    console.log(gsProjects)
+    console.log('gsProjects ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     // let gsProjects = req.app.locals.gsProjArr
     let team = getTeamFromProjArray(gsProjects)
+    console.log('team !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!')
+    console.log(team)
+    console.log('team ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^')
     let gs = new GitSprint({
-        teamMembers: [team],
-        projects: [gsProjects]
+        teamMembers: team,
+        projects: gsProjects
     })
 
     gs.save()
