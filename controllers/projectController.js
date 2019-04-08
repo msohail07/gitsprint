@@ -64,36 +64,13 @@ exports.saveNewProject = function(req, res, next) {
 
     p.save()
         .then(proj => {
-            // console.log(proj)
-            // console.log("PRINTING REQUEST OBJECT -------")
-            // console.log(req)
-            // console.log("PRINTING RESPONSE OBJECT -------")
-            // console.log(res)
             req.gsProjArr = [proj]
-            // console.log("PRINTING REQUEST OBJECT AFTER adding req.gsProjArr = [proj]-------")
-            // console.log(req)
-            // console.log("projectController::69")
-            // console.log([proj])
-            // console.log("=========================")
-            // console.log(req.gsProjArr[0]);
-            // req.app.locals.gsProjArr = [proj]
-            // res.redirect(`/${req.user.username}/profile`)
         })
         .then(() => next())
         .catch(err => {
             console.error(err)
         })
-    // next() // trigger gitsprintController.checkSprintAvailability
 }
-
-// delete project - post (delete in database)
-
-// update project - get (show update form)
-
-// update project - post (post update to database)
-
-// show project - get (display project show page)
-    // res.render('projects/show', {proj: proj}) .. populate comments and then call exec
 
 exports.showProjectPage = function(req, res) {
     Project.findById(req.params.id).populate('comments').exec(function(err, proj) {
@@ -104,3 +81,9 @@ exports.showProjectPage = function(req, res) {
         }
     })
 }
+
+// delete project - post (delete in database)
+
+// update project - get (show update form)
+
+// update project - post (post update to database)

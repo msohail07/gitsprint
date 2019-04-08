@@ -35,7 +35,7 @@ exports.saveComment = function(req, res) {
     Project.findById(req.params.id, (err, proj) => {
         if (err) {
             console.error(err);
-            res.redirect('/' + req.user.username) // redirect to global feed
+            return res.redirect('/' + req.user.username) // redirect to global feed
         } else {
             comment = new Comment({
                 text: req.body.comment.text,
