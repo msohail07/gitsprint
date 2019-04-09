@@ -12,6 +12,7 @@
     </p>
     <h4>Your Projects:</h4>
         <!-- <ol> -->
+        <div id = "projects">
             <% userProjects.forEach((proj) => { %>
                 <a href="/project/<%= proj._id %>">
                 <ul style="border:1px solid red">
@@ -31,5 +32,6 @@
                 </a>
                 <br>
             <% }) %>
+        </div>
         <!-- </ol> -->
 <% include ../partials/footer %>
