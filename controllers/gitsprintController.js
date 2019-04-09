@@ -1,6 +1,7 @@
 const Project = require('../models/project');
 const GitSprint = require('../models/gitsprint');
 const moment = require('moment')
+const mongoose = require('mongoose')
 
 
 exports.landing = function(req, res) {
@@ -22,8 +23,6 @@ function findMaxLangOverlapProj(projArray, langArray) {
     // var maxLangIntersectionLen = maxLangOverlapProject.languages.filter(lang => langArray.includes(lang)).length
     var maxLangOverlapProject
     var maxLangIntersectionLen = 0
-    // ERROR IS HERE
-    // TODO: FIX THIS FOR LOOP.
     console.log("projArray")
     console.log(projArray)
     console.log("langArray")
@@ -105,6 +104,18 @@ function getTeamFromProjArray(projArray) {
     return team
 }
 
+function pushTeamMembers(teamIds, gitsprint) {
+    for (let i = 0; i < teamIds.length; i++) {
+        gitsprint.teamMembers.push(mongoose.Types.ObjectId(teamIds[i]))
+    }
+}
+
+function pushProjects(projects, gitsprint) {
+    for (let i = 0; i < projects.length; i++) {
+        gitsprint.projects.push(mongoose.Types.ObjectId(projects[i]._id))
+    }
+}
+
 exports.createNewGitsprint = function(req, res) {
     console.log("IN exports.createNewGitsprint")
     let gsProjects = req.gsProjArr
@@ -122,36 +133,32 @@ exports.createNewGitsprint = function(req, res) {
     })
 
     gs.save()
-        .then(gs => {
+        .then(gitsprint => {
             console.log("NEW GITSPRINT CREATED:")
             console.log(gs)
             // team.map(t => gs.teamMembers.push(t))
-            team.forEach(t => gs.teamMembers.push(t))
-            (gsProjects.map(proj => proj._id)).forEach(p => gs.projects.push(p))
-            console.log("gs.teamMembers")
-            console.log(gs.teamMembers)
-            console.log("gs.projects")
-            console.log(gs.projects)
+            // team.forEach(t => gs.teamMembers.push(t))
+            pushTeamMembers(team, gitsprint)
+            // (gsProjects.map(proj => proj._id)).forEach(p => gs.projects.push(p))
+            pushProjects(gsProjects, gitsprint)
+            // console.log("gs.teamMembers")
+            // console.log(gs.teamMembers)
+            // console.log("gs.projects")
+            // console.log(gs.projects)
+            gitsprint.save()
+            return gitsprint
 
             // gs.teamMembers.concat(team)
             // gs.projects.concat(gsProjects.map(proj => proj._id))
+        })
+        .then(savedGS => {
+            console.log("gs.teamMembers")
+            console.log(savedGS.teamMembers)
+            console.log("gs.projects")
+            console.log(savedGS.projects)
         })
         .catch(err => {
             console.error(err)
         })
     res.redirect(`/${req.user.username}/profile`)
 }
-
-
-
-// exports.checkSprintAvailability = function(req, res, next) {
-
-//     // find projects with firstMilestone.date same as req.newProj's firstMilestone.date
-//         // if such projects exist
-//             // if more than one project
-//                 // pair with project that uses same language
-//                     // if more than one project
-//                         // pair with project using same frameworks
-//                     // else return project
-//             // else return project
-//         // else return (don't call next)
