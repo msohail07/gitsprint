@@ -1,5 +1,7 @@
 const Project = require('../models/project');
 const GitSprint = require('../models/gitsprint');
+const moment = require('moment')
+
 
 exports.landing = function(req, res) {
     res.render('landing');
@@ -79,10 +81,49 @@ exports.checkSprintAvailability = function(req, res, next) {
     // })
     // .then(() => next()) // createNewGitsprint
     // .catch(() => {return res.redirect(`/${req.user.username}/profile`)})
+  
+    // const today = moment().startOf('day')
+
+    // MyModel.find({
+    //   createdAt: {
+    //     $gte: today.toDate(),
+    //     $lte: moment(today).endOf('day').toDate()
+    //   }
+    // })
+    console.log("newProj")
+    console.log(newProj)
 
     // COMMENT START
-    Project.find({_id: {$ne: newProj._id}})
-    .then(() => {console.log('in project.findByDate');Project.findByDate(newProj.firstMilestone.date)})
+    console.log("newProj.firstMilestone")
+    console.log(newProj.firstMilestone)
+
+    console.log("newProj.firstMilestone.date")
+    console.log(newProj.firstMilestone.date)
+
+
+    // let newProjfmDay = newProj.firstMilestone.date.getDate()
+    // let newProjfmMonth = newProj.firstMilestone.date.getMonth() + 1
+    // let newProjfmYear = newProj.firstMilestone.date.getYear() + 1900
+    // console.log("DATES:::: " + newProjfmDay + " -- " + newProjfmMonth + " -- " + newProjfmYear)
+    // // let newProgFirstMilestone = new Date(newProjfmYear, newProjfmMonth, newProjfmDay)
+    // // let newProgFirstMilestone1 = new Date(newProjfmYear, newProjfmMonth, newProjfmDay+1)
+    // var newProgMS = moment().set({'year': newProjfmYear, 'month': newProjfmMonth, 'day': newProjfmDay})
+    // console.log("newProgMS")
+    // // console.log(newProgMS.toDate())
+    // console.log("newProgMS ^^^^^^^^^^")
+
+    // var nextDay = JSON.parse(JSON.stringify(newProj.firstMilestone.date));
+
+
+    // var nextDay = newProj.firstMilestone.date
+    // nextDay = new Date(nextDay.setTime( nextDay.getTime() + 1 * 86400000 ));
+
+    
+    // Project.find({_id: {$ne: newProj._id}, 'firstMilestone.date': {'$gte': newProgMS.startOf('day').toDate(), '$lte': moment(newProgMS).endOf('day').toDate()}})
+    Project.find({_id: {$ne: newProj._id},
+                    'firstMilestone.date': {'$eq': newProj.firstMilestone.date}
+                })
+    // .then(() => {console.log('in project.findByDate');Project.findByDate(newProj.firstMilestone.date)})
     .then((p) => {
         console.log("Result of console.log(p) BELOW _______")
         console.log(p)
@@ -99,7 +140,6 @@ exports.checkSprintAvailability = function(req, res, next) {
     .then(() => next()) // createNewGitsprint
     .catch(() => {return res.redirect(`/${req.user.username}/profile`)})
     // COMMENT END
-
 }
 
 // exports.checkSprintAvailability = function(req, res, next) {

@@ -1,4 +1,4 @@
-var mongoose = require("mongoose");
+var mongoose = require("mongoose").set('debug', true);
 
 var projectSchema = mongoose.Schema({
     title: {type: String, required: true},
