@@ -8,7 +8,7 @@ exports.landing = function(req, res) {
     res.render('landing');
 }
 
-exports.redirectHome = function(req, res) {
+exports.renderHomeGlobalIndex = function(req, res) {
     res.redirect("/" + req.user.username);
 }
 

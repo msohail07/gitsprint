@@ -11,7 +11,7 @@ const authMiddleware = require('../middleware/auth');
 // GitSprint landing page
 router.get('/', gitsprint.landing);
 
-router.get("/home", authMiddleware.isLoggedIn, gitsprint.redirectHome);
+router.get("/home", authMiddleware.isLoggedIn, gitsprint.renderHomeGlobalIndex);
 
 router.get('/register', auth.showRegistration);
 

@@ -3,11 +3,19 @@ const Gitsprint = require('../models/gitsprint');
 const Comment = require('../models/comment')
 
 exports.getGlobal = function(req, res) {
-    res.render('global/index');
+    // res.render('global/index');
     // get list of all projects
     // get list of all gitsprints
     // merge both lists and sort descending by timestamp
     // display on global/index page.
+    Promise.all([Project.find(), Gitsprint.find()])
+    .then(projGitsprint => {
+        let [proj, gs] = projGitsprint
+        res.render('global/index', {projects: proj, gitsprints: gs})
+    })
+    .catch(err => {
+        console.error(err)
+    })
 }
 
 

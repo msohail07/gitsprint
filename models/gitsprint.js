@@ -1,4 +1,3 @@
-// gitsprint model
 const mongoose = require('mongoose')
 
 var gitsprintSchema = mongoose.Schema({
