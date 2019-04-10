@@ -6,17 +6,19 @@
 <div id = "projectsAndGitsprints" style="padding-bottom: 100px;">
     <% projects.forEach((proj) => { %>
         <ul style="border:1px solid red">
-                <li>Title: <%= proj.title %></li>
-                <li>Author: <%= proj.author.username %></li>
-                <li>Description: <%= proj.description %></li>
-                <li>Milestone: <%= proj.firstMilestone %></li>
-                <li>Completion estimate: <%= proj.completionDate %></li>
-                <li>Languages: <%= proj.languages %></li>
-                <% if (proj.frameworks != "") { %>
-                    <li>Frameworks: <%= proj.frameworks %></li>
-                <% } else { %>
-                    <li>Frameworks: None</li>
-                <% } %>
+                <a href="/project/<%= proj._id %>">
+                    <li>Title: <%= proj.title %></li>
+                    <li>Author: <%= proj.author.username %></li>
+                    <li>Description: <%= proj.description %></li>
+                    <li>Milestone: <%= proj.firstMilestone %></li>
+                    <li>Completion estimate: <%= proj.completionDate %></li>
+                    <li>Languages: <%= proj.languages %></li>
+                    <% if (proj.frameworks != "") { %>
+                        <li>Frameworks: <%= proj.frameworks %></li>
+                    <% } else { %>
+                        <li>Frameworks: None</li>
+                    <% } %>
+                </a>
             </ul>
     <% }) %>
     <hr>
