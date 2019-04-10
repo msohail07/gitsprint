@@ -1,4 +1,6 @@
 const Project = require('../models/project');
+const Gitsprint = require('../models/gitsprint');
+const Comment = require('../models/comment')
 
 exports.getGlobal = function(req, res) {
     res.render('global/index');
@@ -15,10 +17,19 @@ exports.getUserProfile = function(req, res) {
         if (err) {
             console.error(err);
         } else {
-            res.render('users/profile', {userProjects: projects})
+//             Gitsprint.find({teamMembers : {$in : [req.user._id]}}).populate('teamMembers', 'projects', 'comments').exec(function(err, gs) {
+            Gitsprint.find({teamMembers : {$in : [req.user._id]}}).populate('teamMembers', 'projects').exec(function(err, gs) {
+                if (err) {
+                    console.error(err)
+                } else {
+                    res.render('users/profile', {userProjects: projects, gitsprints: gs})
+                }
+            })
         }
     })
 }
+
+
 
 // userProfile update - get (upate user profile details)
 

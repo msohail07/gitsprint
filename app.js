@@ -12,12 +12,15 @@ const express = require("express"),
     cookieParser = require('cookie-parser'),
     logger = require('morgan'),
     app = express(),
+    Comment = require("./models/comment")
     User = require("./models/user"),
+    Project = require("./models/project"),
+    Gitsprint = require("./models/gitsprint"),
     indexRoutes = require("./routes/index"),
-    userRoutes = require("./routes/users"),
     commentRoutes = require("./routes/comments"),
+    userRoutes = require("./routes/users"),
     projectRoutes = require("./routes/projects"),
-    // gitsprintRoutes = require("./routes/gitsprints")
+    gitsprintRoutes = require("./routes/gitsprints"),
     port = 3000;
 
 require('./db/database');
@@ -54,10 +57,10 @@ app.use(function(req, res, next) {
 });
 
 app.use("/", indexRoutes)
-app.use("/project", projectRoutes)
 app.use("/project/:id/comment", commentRoutes);
+app.use("/project", projectRoutes)
 // app.use("/gitsprint/:id/comment", commentRoutes);
-// app.use("/gitsprint", gitsprintRoutes);
+app.use("/gitsprint", gitsprintRoutes);
 app.use("/:username", userRoutes);
 
 app.listen(port, () => console.log(`App listening on port ${port}`));

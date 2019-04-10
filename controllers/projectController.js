@@ -1,6 +1,5 @@
-const mongoose = require('mongoose');
 const Project = require('../models/project');
-const Comment = require('../models/comment');
+// const Comment = require('../models/comment');
 const { body, validationResult } = require('express-validator/check');
 const { sanitizeBody } = require('express-validator/filter');
 

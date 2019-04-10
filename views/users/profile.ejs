@@ -7,31 +7,39 @@
 
     </ul>
     <p>
-        <!-- <a class="btn btn-primary" href="/<%= currentUser.username %>/projects/new">Create new Project</a> -->
         <a class="btn btn-primary" href="/project/new">Create new Project</a>
     </p>
     <h4>Your Projects:</h4>
-        <!-- <ol> -->
-        <div id = "projects">
+        <div id = "userProjects">
             <% userProjects.forEach((proj) => { %>
                 <a href="/project/<%= proj._id %>">
-                <ul style="border:1px solid red">
-                    <!-- <li><a href="/<%= currentUser.username %>/projects/<%= proj._id %>">Title: <%= proj.title %></a></li> -->
-                    <!-- <li><a href="/projects/<%= proj._id %>">Title: <%= proj.title %></a></li> -->
-                    <li>Title: <%= proj.title %></li>
-                    <li>Description: <%= proj.description %></li>
-                    <li>Milestone: <%= proj.firstMilestone %></li>
-                    <li>Completion estimate: <%= proj.completionDate %></li>
-                    <li>Languages: <%= proj.languages %></li>
-                    <% if (proj.frameworks != "") { %>
-                        <li>Frameworks: <%= proj.frameworks %></li>
-                    <% } else { %>
-                        <li>Frameworks: None</li>
-                    <% } %>
-                </ul>
+                    <ul style="border:1px solid red">
+                        <li>Title: <%= proj.title %></li>
+                        <li>Description: <%= proj.description %></li>
+                        <li>Milestone: <%= proj.firstMilestone %></li>
+                        <li>Completion estimate: <%= proj.completionDate %></li>
+                        <li>Languages: <%= proj.languages %></li>
+                        <% if (proj.frameworks != "") { %>
+                            <li>Frameworks: <%= proj.frameworks %></li>
+                        <% } else { %>
+                            <li>Frameworks: None</li>
+                        <% } %>
+                    </ul>
                 </a>
                 <br>
             <% }) %>
         </div>
-        <!-- </ol> -->
+    <h4>Your GitSprints:</h4>
+        <div id="userGitsprints">
+                <% gitsprints.forEach((gs) => { %>
+                    <a href="/gitsprint/<%= gs._id %>">
+                        <ul style="border:1px solid red">
+                            <li>Team: <%= gs.teamMembers %></li>
+                            <li>Projects: <%= gs.projects %></li>
+
+                        </ul>
+                    </a>
+                    <br>
+                <% }) %>
+        </div>
 <% include ../partials/footer %>

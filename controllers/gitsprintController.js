@@ -1,8 +1,8 @@
-const Project = require('../models/project');
-const GitSprint = require('../models/gitsprint');
-const moment = require('moment')
 const mongoose = require('mongoose')
-
+const Project = require('../models/project');
+const Comment = require('../models/comment');
+const GitSprint = require('../models/gitsprint');
+// const moment = require('moment')
 
 exports.landing = function(req, res) {
     res.render('landing');
@@ -161,4 +161,14 @@ exports.createNewGitsprint = function(req, res) {
             console.error(err)
         })
     res.redirect(`/${req.user.username}/profile`)
+}
+
+exports.showGitsprintPage = function(req, res) {
+    GitSprint.findById(req.params.id).populate('comments').populate('projects').populate('teamMembers').exec(function(err, gitsprint) {
+        if (err) {
+            console.log(err)
+        } else {
+            res.render('gitsprints/show', {gitsprint: gitsprint})
+        }
+    })
 }
