@@ -30,7 +30,6 @@ exports.login = function(req, res) {
 
 // handle logout
 exports.logout = function(req, res) {
-    console.log(req.body);
     req.logout();
     res.redirect('/');
 }
